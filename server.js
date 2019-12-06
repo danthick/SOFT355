@@ -1,4 +1,5 @@
 var express = require("express");
+var path = require("path");
 //var mongoose = require("mongoose");
 //var db = require("./db");
 //var logic = require("./logic");
@@ -11,8 +12,14 @@ var app = express();
 //app.use(express.static("client"));
 
 
-app.get("/test", function (request, response) {
-    console.log("it worked!");
+app.get("/", function(request, response){
+    console.log("Viewing the homepage");
+    response.sendFile(path.join(__dirname + '/index.html'));
+});
+
+app.get("/login", function (request, response) {
+    console.log("Viewing login page");
+    response.sendFile(path.join(__dirname + '/login.html'));
 });
 
 

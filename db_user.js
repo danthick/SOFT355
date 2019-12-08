@@ -5,11 +5,7 @@ const uri = "mongodb+srv://dthick:kznvRYL5QeIHMNdL@soft355-vjwy9.mongodb.net/tes
 
 
 MongoClient.connect(uri, function(err, db) {
-    useNewUrlParser: true
-    useUnifiedTopology: true
     var user = new schemas.User({"email": "dan.thick@hotmail.co.uk", "password": "password", "firstName": "Dan", "lastName": "Thick"});
-    
     db.db("db").collection("users").insertOne(user);
-
     db.close();
 });

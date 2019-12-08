@@ -1,10 +1,11 @@
 var express = require("express");
 var path = require("path");
-//var mongoose = require("mongoose");
+var mongoose = require("mongoose");
+const MongoClient = require("mongodb").MongoClient;
 //var db = require("./db");
 //var logic = require("./logic");
 
-//var uri = "mongodb+srv://dthick:4KDAUkP0r3yW42Mr@soft355-vjwy9.mongodb.net/test?retryWrites=true&w=majority";
+var uri = "mongodb://dthick:VRA5ocgWNj1PP3Qd@soft355-vjwy9.mongodb.net/test?retryWrites=true&w=majority";
 
 var app = express();
 
@@ -24,14 +25,20 @@ app.get("/login", function (request, response) {
 
 
 app.listen(9000, function () {
-    // Connect to Mongoose.
-    //mongoose.connect(uri, {
-    //    useNewUrlParser: true,
-    //    useUnifiedTopology: true
-    //}).then((test) => {
-    //    console.log("Connected to DB");
-    //});
+    //Connect to Mongoose.
+    MongoClient.connect(uri, function(err, client){
+        console.log("connect to db");
+        const db = client.db("users");
 
+        db.collection('users').insertOne({
+            email: "dan.thick@hotmail.co.uk",
+            password: "password",
+            firstName: "Dan",
+            lastName: "Thick"
+        }).then(function(result){
+            console.log("inserted");
+        })
+    })
     // Some output for the interested reader...
     console.log("Listening on 9000");
 })

@@ -1,1 +1,0 @@
-console.log("printed from js");

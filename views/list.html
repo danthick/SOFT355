@@ -1,0 +1,40 @@
+<DOCTYPE! html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <title>ToDo List</title>
+    </head>
+    
+    <style>
+        table { border-collapse: collapse; }
+        td, th { border: 1px #000 solid; }
+
+    </style>
+
+    <script>
+        var app = angular.module("myApp", []);
+        app.controller("myCtrl", function($scope) {
+          $scope.students = [
+            {name: "Jane Bloggs", course: "Computer Science"},
+            {name: "John Smith", course: "Computing"},
+            {name: "Melissa Brown", course: "Computer Science"}];
+        });
+    </script>
+
+    <body ng-app="myApp">
+        <div ng-controller="myCtrl" id="table">
+            <form>
+                <input type="text" name="item" placeholder="Add a todo item">
+                <button type ="submit">Add Item</button>
+            </form>
+
+            <table>
+                <tr ng-repeat="student in students">
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.course }}</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>

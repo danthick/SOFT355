@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-
 var User = mongoose.model("User", {
     id: String,
     email: String, 
@@ -8,4 +7,11 @@ var User = mongoose.model("User", {
     lastName: String,
 });
 
+var ToDoItem = mongoose.model("Item", {
+    id: String,
+    item: String,
+    userId: String,
+});
+
 module.exports.User = User;
+module.exports.ToDoItem = ToDoItem;

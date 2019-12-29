@@ -13,7 +13,12 @@
   "description": "",
   "dependencies": {
     "chai": "^4.2.0",
+    "ejs": "^3.0.1",
+    "express": "^4.17.1",
+    "html": "^1.0.0",
     "mocha": "^6.2.2",
-    "mongodb": "^3.3.5"
+    "mongodb": "^3.3.5",
+    "mongoose": "^5.8.3",
+    "path": "^0.12.7"
   }
 }

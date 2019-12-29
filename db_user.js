@@ -3,7 +3,7 @@ var schemas = require("./schemas");
 const uri = "mongodb+srv://dthick:kznvRYL5QeIHMNdL@soft355-vjwy9.mongodb.net/test?retryWrites=true&w=majority";
 
 // POST data
-MongoClient.connect(uri, function(err, db) {
+MongoClient.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true}, function(err, db) {
     var users = db.db("db").collection("users");
     var user = new schemas.User({"email": "dan.thick@hotmail.co.uk", "password": "password", "firstName": "Dan", "lastName": "Thick"});
     var user2 = new schemas.User({"email": "amyjagla@gmail.com", "password": "password", "firstName": "Amy", "lastName": "Jagla"});
@@ -14,8 +14,8 @@ MongoClient.connect(uri, function(err, db) {
     //users.insertOne(user3);
 
     // GET data
-    users.find({firstName: "Amy"}).toArray().then((data) => {
-
+    users.find({}).toArray().then((data) => {
+        console.log(data);
     });
 
     // DELETE data

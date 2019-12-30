@@ -12,6 +12,9 @@ MongoClient.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true}, func
     //users.insertOne(user);
     //users.insertOne(user2);
     //users.insertOne(user3);
+    var item = db.db("db").collection("todoItems");
+    var item1 = new schemas.ToDoItem({"item": "Wash clothes", "email": "dan.thick@hotmail.co.uk"});
+    item.insertOne(item1);
 
     // GET data
     users.find({}).toArray().then((data) => {

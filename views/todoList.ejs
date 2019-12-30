@@ -3,6 +3,7 @@
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="todo.js" type="text/javascript"></script>
         <title>ToDo List</title>
     </head>
     
@@ -11,17 +12,17 @@
         td, th { border: 1px #000 solid; }
     </style>
 
-    <body ng-app="myApp">
-        <div ng-controller="myCtrl" id="table">
+    
+    <body>
+        <div>
+            <!--<form action="http://localhost:9000/todo" method="POST">-->
             <form>
-                <input type="text" name="item" placeholder="Add a todo item">
+                <input type="text" id="item" placeholder="Add a todo item">
                 <button type ="submit">Add Item</button>
             </form>
             <table>
-                <% for(var i = 0; i < userData.length; i++){ %>
-                    <tr><td><%= userData[i].firstName%></td>
-                    <td><%= userData[i].lastName%></td>
-                    <td><%= userData[i].email%></td></tr>
+                <% for(var i = 0; i < items.length; i++){ %>
+                    <tr><td><%= items[i].item%></td></tr>
                 <%}%>
             </table>
         </div>

@@ -10,7 +10,7 @@ var User = mongoose.model("User", {
 var ToDoItem = mongoose.model("Item", {
     id: String,
     item: String,
-    userId: String,
+    email: String,
 });
 
 module.exports.User = User;

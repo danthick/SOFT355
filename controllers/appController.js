@@ -9,7 +9,6 @@ mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true}, functio
 });
 
 module.exports = function(app){
-
     app.get("/", function(request, response){
         console.log("Viewing the homepage");
         response.sendFile(path.join(__dirname, '..', '/index.html'));
@@ -20,17 +19,22 @@ module.exports = function(app){
         response.render('register.ejs');
     });
 
-    app.post("/register", async function(request, response){
+    app.post("/register", function(request, response){
+        // Hash password
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(request.body.password, salt);
 
-        //const hashed = await bcrypt.hash(request.body.password, 10)
-        
-        var newUser = new schemas.User(request.body);
+        // Create and save new user
+        var newUser = new schemas.User({"email": request.body.email, "password": hash, "firstName": request.body.firstName, "lastName": request.body.lastName});
         newUser.save(function(err, data){
             //response.json(data);
             //response.render('todoList.ejs', {items: data});
         });
-        response.end();
-        console.log("POST successful");
+        //response.end();
+
+        response.send({redirect: '/login'});
+        console.log("POST successful for new user");
+       
     })
 
     app.get("/login", function (request, response) {

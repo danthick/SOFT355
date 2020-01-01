@@ -10,9 +10,8 @@ $(document).ready(function(){
                 url: '/todo',
                 data: todoItem,
                 success: function(data){
-                    console.log("POST....")
+                    $("#todoTable").load(" #todoTable");
                 }
-               
             })
         }
     });

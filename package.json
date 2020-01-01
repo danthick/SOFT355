@@ -1,7 +1,7 @@
 {
   "name": "todolist",
   "version": "1.0.0",
-  "main": "login.js",
+  "main": "server.js",
   "directories": {
     "test": "test"
   },
@@ -12,6 +12,7 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "ejs": "^3.0.1",

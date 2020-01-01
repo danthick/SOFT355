@@ -4,25 +4,25 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="todo.js" type="text/javascript"></script>
+        <link rel="stylesheet" type="text/css" href="css/todo.css">
         <title>ToDo List</title>
     </head>
     
-    <style>
+    <!-- <style>
         table { border-collapse: collapse; }
         td, th { border: 1px #000 solid; }
-    </style>
+    </style> -->
 
     
     <body>
         <div>
-            <!--<form action="http://localhost:9000/todo" method="POST">-->
             <form>
                 <input type="text" id="item" placeholder="Add a todo item">
                 <button type ="submit">Add Item</button>
             </form>
-            <table>
+            <table id="todoTable">
                 <% for(var i = 0; i < items.length; i++){ %>
-                    <tr><td><%= items[i].item%></td></tr>
+                    <tr><td><li><%= items[i].item%></li></td></tr>
                 <%}%>
             </table>
         </div>

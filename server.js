@@ -18,16 +18,20 @@ app.use(session({
     resave: true,
     rolling: true,
     saveUninitialized: false,
-    cookie: { maxAge: 3600000 } // Sets a maximum login session to 1 hour
+    cookie: { maxAge: 3600000 } // Sets a maximum login session to 1 hour of inactivity
 }))
 app.use(passportLib.initialize());
 app.use(passportLib.session());
 
 var mongoose = require("mongoose");
-const uri = "mongodb+srv://dthick:kznvRYL5QeIHMNdL@soft355-vjwy9.mongodb.net/db?retryWrites=true&w=majority";
+const uri = "mongodb://dthick:m18WKhWQLWq9Bak2@soft355-shard-00-00-vjwy9.mongodb.net:27017,soft355-shard-00-01-vjwy9.mongodb.net:27017,soft355-shard-00-02-vjwy9.mongodb.net:27017/db?ssl=true&replicaSet=SOFT355-shard-0&authSource=admin&retryWrites=true&w=majority";
 
 mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true}, function(err, db) {
-    console.log("Connected to database"); 
+    if (err) { 
+        console.log(err); 
+    } else {
+        console.log("Connected to database"); 
+    }
 })
 
 // Call controllers

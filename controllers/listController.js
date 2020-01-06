@@ -2,6 +2,7 @@ var schemas = require("../schemas");
 
 module.exports = function(app){    
     app.get("/todo", checkAuthenticated, function(request, response){
+        console.log(request.user);
         schemas.ToDoItem.find({}, function(err, data){
             response.render('todoList.ejs', {items: data});
         })

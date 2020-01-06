@@ -10,7 +10,6 @@ function InitPassport(passport, getUserByEmail){
             // NO USER WITH EMAIL
         }
         try{
-
             if (bcrypt.compareSync(password, user[0].password)){ // Checks password
                 // MATCHES
                 return done(null, user);

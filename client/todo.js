@@ -15,4 +15,17 @@ $(document).ready(function(){
             })
         }
     });
+
 });
+
+function deleteItem(todoItem){
+    console.log(todoItem);
+    $.ajax({
+        type: 'DELETE',
+        url: '/todo/' + todoItem,
+        data: todoItem,
+        success: function(data){
+            $("#todoTable").load(" #todoTable");
+        }
+    })
+}

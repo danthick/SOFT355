@@ -7,11 +7,6 @@
         <link rel="stylesheet" type="text/css" href="css/todo.css">
         <title>ToDo List</title>
     </head>
-    
-    <!-- <style>
-        table { border-collapse: collapse; }
-        td, th { border: 1px #000 solid; }
-    </style> -->
 
     
     <body>
@@ -22,7 +17,7 @@
             </form>
             <table id="todoTable">
                 <% for(var i = 0; i < items.length; i++){ %>
-                    <tr><td><li><%= items[i].item%></li></td></tr>
+                    <tr><td><li"><%= items[i].item%><button class="deleteButton"  onclick="deleteItem('<%= items[i].item  %>')" id="deleteBtn" ">x</button></li> </td></tr>
                 <%}%>
             </table>
         </div>

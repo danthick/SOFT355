@@ -21,6 +21,7 @@ module.exports = function (app){
     });
 
     app.delete("/todo/:item", checkAuthenticated, function(request, response){
+        console.log("DELETE....")
         schemas.ToDoItem.findOneAndDelete({"item": request.params.item}, function(err, data){
             console.log
         });

@@ -1,23 +1,59 @@
 <DOCTYPE! html>
-<html>
-<head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="register.js" type="text/javascript"></script>
-</head>
-<body>
-    <h1> This is the register page. </h1>
+    <html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <script src="register.js" type="text/javascript"></script>
 
-    <form>
-        <div><input type="email" id="email" placeholder="Email Address" required></div>
-        <div><input type="text" id="fName" placeholder="First Name" required></div>
-        <div><input type="text" id="lName" placeholder="Last Name" required></div>
-        <div><input type="password" id="password" placeholder="Password" required></div>
-        <div><input type="password" id="cPassword" placeholder="Confirm Password" required></div>
-        
-        <button type ="submit">Register</button>
-    </form>
-    <a href="/login">Login</a>
-</body>
-    
-</html>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+            id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <h1> This is the register page. </h1>
+
+        <form id="register-form">
+            <div class="form-content">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="email" class="form-control" id="email" placeholder="Email Address *" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fName" placeholder="First Name *" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="lName" placeholder="Last Name *" required />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" placeholder="Your Password *"
+                            required />
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="cPassword" placeholder="Confirm Password *"
+                            required />
+                    </div>
+                    <button type="submit" id="btn-register">Register</button> Or <a href="/login">Login</a>
+                </div>
+            </div>
+        </form>
+        <!-- Modal Success Popup -->
+        <div class="modal fade success-popup" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog modal-sm" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Registration Successful!</h4>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p class="lead">You have successfully registered. Please log in.
+                        </p>
+                        <a href="./login" class="rd_more btn btn-default">Login</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </body>
+
+    </html>

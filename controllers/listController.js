@@ -1,15 +1,16 @@
 var schemas = require("../schemas");
 
-module.exports = function(app){    
-    app.get("/todo", checkAuthenticated, function(request, response){
-        console.log(request.user);
-        schemas.ToDoItem.find({}, function(err, data){
+module.exports = function (app){    
+    app.get("/todo", checkAuthenticated, async function(request, response){
+        var user = await getUserByEmail(request._passport.session.user)
+        schemas.ToDoItem.find({email: user[0].email}, function(err, data){
             response.render('todoList.ejs', {items: data});
         })
     });
 
-    app.post('/todo', checkAuthenticated, function(request, response){
-        var newItem = new schemas.ToDoItem({"item": request.body.item, "email": "dan.thick@hotmail.co.uk"});
+    app.post('/todo', checkAuthenticated, async function(request, response){
+        var user = await getUserByEmail(request._passport.session.user)
+        var newItem = new schemas.ToDoItem({"item": request.body.item, "email": user[0].email});
         newItem.save(function(err, data){
             console.log(request.body);
             //response.json(data);
@@ -35,10 +36,14 @@ module.exports = function(app){
         res.redirect('/login')
       }
       
-      function checkNotAuthenticated(req, res, next) {
+    function checkNotAuthenticated(req, res, next) {
         if (req.isAuthenticated()) {
           return res.redirect('/')
         }
         next()
-      }
+    }
+
+    async function getUserByEmail(email){
+        return await schemas.User.find({email: email}); 
+    }
 }   

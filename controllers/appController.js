@@ -44,7 +44,7 @@ module.exports = function (app) {
         } else {
             response.sendStatus(400);
             console.log("EMAIL EXISTS")
-        }       
+        }
     })
 
     app.get("/login", checkNotAuthenticated, function (request, response) {
@@ -78,9 +78,10 @@ module.exports = function (app) {
         next()
     }
 
-
-    async function getUserByEmail(email){
-        return await schemas.User.find({email: email}); 
+    async function getUserByEmail(email) {
+        return await schemas.User.find({
+            email: email
+        });
     }
 
     app.listen(9000, function () {

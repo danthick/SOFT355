@@ -12,6 +12,7 @@ var ToDoItem = mongoose.model("todoItem", {
     id: String,
     item: String,
     email: String,
+    completed: Boolean,
 });
 
 module.exports.User = User;

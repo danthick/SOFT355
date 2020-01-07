@@ -13,6 +13,7 @@ $(document).ready(function () {
 
         // Resetting validity
         $("#cPassword")[0].setCustomValidity('');
+        $('#email')[0].setCustomValidity('');
         var uniqueEmail = false;
         event.preventDefault();
         // Checking form validity
@@ -33,12 +34,14 @@ $(document).ready(function () {
 
                     },
                     error: function(respsonse){
-                        alert("email already exists")
+                        event.preventDefault();
+                        $('#email')[0].setCustomValidity('Email address already exists.');
+                        $('#email')[0].reportValidity();
                     }
 
                 })
                 
-                // If passwords don't match
+            // If passwords don't match
             } else {
                 event.preventDefault();
                 $("#cPassword")[0].setCustomValidity('Password Must be Matching.');

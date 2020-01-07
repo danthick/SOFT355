@@ -1,22 +1,45 @@
 <DOCTYPE! html>
-<html>
-<head>
+    <html>
 
-</head>
-<body>
-    <h1> This is the login page. </h1>
-
-    <% if (messages.error) { %>
-        <%= messages.error %>
-      <% } %>
-
-    <form action="/login" method="POST">
-        <div><input type="email" id="email" name="email" placeholder="Email Address" required></div>
-        <div><input type="password" id="password" name="password" placeholder="Password" required></div>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
+            id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
         
-        <button type ="submit">Login</button>
-    </form>
-    <a href="/register">Register</a>
-</body>
-    
-</html>
+        <link rel="stylesheet" type="text/css" href="css/login.css">
+    </head>
+
+    <body>
+
+
+        <% if (messages.error) { %>
+        <%= messages.error %>
+        <% } %>
+
+
+        <div class="container login-container">
+                <div class="login-form text-center">
+                        <h1>GetIt Done</h1>
+                        <img src="https://img.icons8.com/cotton/64/000000/checklist--v1.png">
+                    
+                    <form action="/login" method="POST">
+                        <h3>Please enter your login details:</h3>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="confirmButton">Login</button>
+                        </div>
+                        <div class="form-group">
+                            <a href="/register" class="register">Don't have an account? Click here to register!</a>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </body>
+
+    </html>

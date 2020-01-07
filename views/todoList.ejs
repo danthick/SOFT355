@@ -1,27 +1,74 @@
 <DOCTYPE! html>
-<html>
+    <html>
+
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+            id="bootstrap-css">
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="todo.js" type="text/javascript"></script>
         <link rel="stylesheet" type="text/css" href="css/todo.css">
         <title>ToDo List</title>
     </head>
 
-    
+
     <body>
-        <div>
-            <form>
-                <input type="text" id="item" placeholder="Add a todo item">
-                <button type ="submit">Add Item</button>
-            </form>
-            <table id="todoTable">
-                <% for(var i = 0; i < items.length; i++){ %>
-                    <tr><td><li"><%= items[i].item%><button class="deleteButton"  onclick="deleteItem('<%= items[i].item  %>')" id="deleteBtn" ">x</button></li> </td></tr>
-                <%}%>
-            </table>
+        <form class="bodyHeader">
+            <div class="form-group">
+                <img src="https://img.icons8.com/cotton/64/000000/checklist--v1.png" style="float: left">
+                <h1 style="margin-right: 50px;">Welcome back <%=currentUser[0].firstName%>!</h1>
+                <button onclick="location.href='logout'" type="button" style="float: right"
+                    class="confirmButton">Logout</button>
+            </div>
+        </form>
+        <div class="row">
+            <div class="column">
+                <form class="addHeader">
+                    <h1>To Do</h1>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="item" placeholder="Add a to do item">
+                    </div>
+
+                    <button type="submit" class="confirmButton" id="addBtn">Add Item</button>
+                </form>
+                <ul id="todoTable">
+                    <% for(var i = 0; i < items.length; i++){ %>
+                        <tr>
+                            <td>
+                                <% if (items[i].completed == false){ %>
+                                <li contentEditable=false id=<%=i.toString()%>><%= items[i].item%><button
+                                        class="editButton" onclick="editItem('<%=i.toString()%>', '<%= items[i].item  %>')"
+                                        id="editBtn<%=i.toString()%>">&#9998;</button><button class="deleteButton" onclick="deleteItem('<%= items[i].item  %>')"
+                                        id="deleteBtn<%=i.toString()%>">&#128465;</button></li>
+                            </td>
+                        </tr>
+                        <% } %>
+    
+                        <%}%>
+                </ul>
         </div>
 
-        <button onclick="location.href='logout'" type="button">Logout</button>
+        <div class="column">
+            <form class="addHeader">
+                <h1>Completed</h1>
+            </form>
+            <ul id="todoTable">
+                <% for(var i = 0; i < items.length; i++){ %>
+                    <tr>
+                        <td>
+                            <% if (items[i].completed == true){ %>
+                            <li contentEditable=false id=<%=i.toString()%>><%= items[i].item%><button
+                                    class="editButton" onclick="editItem('<%=i.toString()%>', '<%= items[i].item  %>')"
+                                    id="editBtn<%=i.toString()%>">&#9998;</button><button class="deleteButton" onclick="deleteItem('<%= items[i].item  %>')"
+                                    id="deleteBtn<%=i.toString()%>">&#128465;</button></li>
+                        </td>
+                    </tr>
+                    <% } %>
+
+                    <%}%>
+                </ul>
+        </div>
+    </div>
     </body>
 </html>

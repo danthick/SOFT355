@@ -26,6 +26,7 @@ module.exports = function (app) {
     app.post("/register", checkNotAuthenticated, async function (request, response) {
         // Hash password
         var salt = bcrypt.genSaltSync(10);
+        console.log(request.body);
         var hash = bcrypt.hashSync(request.body.password, salt);
 
         // Checking if email already exists
@@ -45,6 +46,15 @@ module.exports = function (app) {
             response.sendStatus(400);
             console.log("EMAIL EXISTS")
         }
+    })
+
+    app.delete("/register/:email", checkNotAuthenticated, async function (request, response) {
+        //var user = await getUserByEmail(request._passport.session.user);
+        console.log("Deleting user")
+        schemas.User.findOneAndDelete({
+            email: request.params.email,
+        }, function (err, data) {});
+        response.end();
     })
 
     app.get("/login", checkNotAuthenticated, function (request, response) {

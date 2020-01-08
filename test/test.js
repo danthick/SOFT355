@@ -57,14 +57,29 @@ var user = {
 chai.use(chaiHttp);
 chai.should();
 
+app.use(require('body-parser').json());
+
 describe("Register User", () => {
     it("should register a new user", (done) => {
         chai.request(app)
         .post("/register")
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({user})
+        .type('form')
+        .send(user)
         .end((err, res) => {
             res.should.have.status(200);
+            done();
+        });
+    });
+});
+
+describe("Delete User", () => {
+    it("should delete an existing user", (done) => {
+        chai.request(app)
+        .delete("/register/" + user.email)
+        .type('form')
+        .end((err, res) => {
+            res.should.have.status(200);
+            done();
         });
     });
 });

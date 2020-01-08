@@ -43,3 +43,5 @@ mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true}, functio
 // Call controllers
 appController(app);
 listController(app);
+
+module.exports = app;

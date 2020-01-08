@@ -26,7 +26,6 @@ module.exports = function (app) {
     app.post("/register", checkNotAuthenticated, async function (request, response) {
         // Hash password
         var salt = bcrypt.genSaltSync(10);
-        console.log(request.body);
         var hash = bcrypt.hashSync(request.body.password, salt);
 
         // Checking if email already exists
@@ -44,7 +43,6 @@ module.exports = function (app) {
             console.log("POST successful for new user");
         } else {
             response.sendStatus(400);
-            console.log("EMAIL EXISTS")
         }
     })
 

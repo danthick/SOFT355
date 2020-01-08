@@ -6,7 +6,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha -u tdd --exit"
+    "test": "mocha -u tdd"
   },
   "author": "",
   "license": "ISC",

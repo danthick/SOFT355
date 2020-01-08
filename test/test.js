@@ -62,25 +62,25 @@ app.use(require('body-parser').json());
 describe("Register User", () => {
     it("should register a new user", (done) => {
         chai.request(app)
-        .post("/register")
-        .type('form')
-        .send(user)
-        .end((err, res) => {
-            res.should.have.status(200);
-            done();
-        });
+            .post("/register")
+            .type('form')
+            .send(user)
+            .end((err, res) => {
+                res.should.have.status(200);
+                done();
+            });
     });
 });
 
 describe("Delete User", () => {
     it("should delete an existing user", (done) => {
         chai.request(app)
-        .delete("/register/" + user.email)
-        .type('form')
-        .end((err, res) => {
-            res.should.have.status(200);
-            done();
-        });
+            .delete("/register/" + user.email)
+            .type('form')
+            .end((err, res) => {
+                res.should.have.status(200);
+                done();
+            });
     });
 });
 
@@ -119,4 +119,5 @@ describe("todoItems", () => {
                 });
         });
     });
+    //process.exit(1);
 });

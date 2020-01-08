@@ -1,3 +1,13 @@
+var socket = new WebSocket("ws://localhost:9000/");
+var email = $("#currentUser").text();
+
+socket.onmessage = function (e) {
+    if (e.data == email) {
+        setTimeout(function () {
+            $("#changes").css("display", "inherit");
+        }, 2000);
+    }
+};
 $(document).ready(function () {
     $('#addBtn').on('click', function (event) {
         var item1 = $('#item');
@@ -15,7 +25,8 @@ $(document).ready(function () {
                 url: '/todo',
                 data: todoItem,
                 success: function (data) {
-                    $("#todoTable").load(" #todoTable");
+                    socket.send(email);
+                    location.reload(true);
                 }
             })
         }
@@ -23,7 +34,7 @@ $(document).ready(function () {
 
     $('li').on('click', function (e) {
         console.log(e.target.className);
-        if (e.target.className == "editButton" || e.target.className == "deleteButton") {} else {
+        if (e.target.className !== "editButton" && e.target.className !== "deleteButton" && e.target.isContentEditable !== true) {
             var todoItem = $(this).contents().get(0).nodeValue
             $.ajax({
                 type: 'PUT',
@@ -31,10 +42,11 @@ $(document).ready(function () {
                 data: {
                     item: todoItem
                 },
-                dataType: "json",
                 success: function (data) {
-                    $("#todoTable").load(" #todoTable");
+                    socket.send(email);
+                    location.reload();
                 }
+
             })
         }
     })
@@ -48,18 +60,16 @@ function editItem(todoIndex, todoItem) {
     $("#deleteBtn" + todoIndex).attr("contenteditable", "false");
 
     $('li').css("pointer-events", "none");
+    $('li').css("pointer-events", "all");
     $("#" + todoIndex).focus();
 
-    
-    $("#" + todoIndex).on('focusout', function () {
 
-        $('li').css("pointer-events", "none");
+    $("#" + todoIndex).on('focusout', function () {
         var newItem = $("#" + todoIndex).contents().get(0).nodeValue;
         if (newItem == null) {
             $("#" + todoIndex).contents().get(0).setCustomValidity('Password Must be Matching.');
             $("#" + todoIndex).contents().get(0).reportValidity();
         } else {
-
             $.ajax({
                 type: 'PUT',
                 url: '/todo/' + todoItem,
@@ -67,15 +77,10 @@ function editItem(todoIndex, todoItem) {
                     old: todoItem,
                     new: newItem
                 },
-                dataType: "json",
-                success: function (data) {
-                    $("#todoTable").load(" #todoTable");
-                }
             })
-            event.preventDefault();
-
+            socket.send(email);
+            location.reload(true);
         }
-        $('li').css("pointer-events", "auto");
     })
 }
 
@@ -86,7 +91,8 @@ function deleteItem(todoItem) {
         url: '/todo/' + todoItem,
         data: todoItem,
         success: function (data) {
-            $("#todoTable").load(" #todoTable");
+            socket.send(email);
+            location.reload(true);
         }
     })
 }

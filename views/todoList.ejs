@@ -17,17 +17,21 @@
         <form class="bodyHeader">
             <div class="form-group">
                 <img src="https://img.icons8.com/cotton/64/000000/checklist--v1.png" style="float: left">
+                <p id="currentUser" style="display:none"><%=currentUser[0].email%></p>
                 <h1 style="margin-right: 50px;">Welcome back <%=currentUser[0].firstName%>!</h1>
+                
                 <button onclick="location.href='logout'" type="button" style="float: right"
                     class="confirmButton">Logout</button>
             </div>
         </form>
+        <p id="changes" style="font-size: 15px; display:none; color: darkred; align-self:center" >Changes have been made. Please refresh the page to see them.</p>
+
         <div class="row">
             <div class="column">
                 <form class="addHeader">
                     <h1>To Do</h1>
                     <div class="form-group">
-                        <input type="text" class="form-control" id="item" placeholder="Add a to do item">
+                        <input type="text" class="form-control" id="item" placeholder="Add a to do item" maxlength="50">
                     </div>
 
                     <button type="submit" class="confirmButton" id="addBtn">Add Item</button>

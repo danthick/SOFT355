@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 var listController = require("./controllers/listController");
 var appController = require("./controllers/appController");
 
+
 const flash = require("express-flash");
 const session = require("express-session");
 const passportLib = require("passport");
@@ -11,6 +12,11 @@ var app = express();
 app.set('engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true })); 
 app.use(express.static('./client'));
+
+
+
+
+
 
 app.use(flash());
 app.use(session({

@@ -84,7 +84,32 @@ module.exports = function (app) {
         });
     }
 
-    app.listen(9000, function () {
+
+    var WebSocketServer = require("websocket").server;
+    
+    var server = app.listen(9000, function () {
         console.log("Listening on 9000");
     })
+
+    var wss = new WebSocketServer({ httpServer: server });
+    var clients = [];
+
+    // WebSocket server
+    wss.on('request', function (request) {
+        var connection = request.accept(null, request.origin);
+        clients.push(connection);
+
+
+        connection.on('message', function (message) { 
+            var email = message.utf8Data;
+            clients.forEach(function(client) {
+                client.send(message.utf8Data);
+              });
+        });
+
+        connection.on('close', function (connection) {
+            // close user connection
+        });
+
+    });
 }

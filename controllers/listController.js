@@ -7,7 +7,8 @@ module.exports = function (app) {
             email: user[0].email
         }, function (err, data) {
             response.render('todoList.ejs', {
-                items: data, currentUser: user
+                items: data,
+                currentUser: user
             });
         })
     });
@@ -31,7 +32,7 @@ module.exports = function (app) {
         }, {
             "item": request.body.new
         }, function (err, data) {});
-        response.end();
+        //response.end();
     });
 
     app.delete("/todo/:item", checkAuthenticated, async function (request, response) {

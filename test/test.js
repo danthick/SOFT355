@@ -1,50 +1,12 @@
-// var assert = require("chai").assert;
-// var chai = require('chai');
-// var chaiHttp = require('chai-http');
-
-// chai.use(chaiHttp);
-
-// suite("Test", function () {
-//     test("Test", function () {
-//         assert.equal(3, 3, "Integers do not equal")
-//     })
-// })
-
-// describe('todoItems', () => {
-//     describe('/GET todoItems', () => {
-//         it('it should GET all the books', (done) => {
-//             chai.request(server)
-//                 .get('/todo')
-//                 .end((err, res) => {
-//                     res.should.have.status(200);
-//                     res.body.should.be.a('array');
-//                     res.body.length.should.be.eql(0);
-//                     done();
-//                 });
-//         })
-//     })
-// })
-
-// suite("Register", function () {
-//     test("Register Function", function () {
-//         // Creating test user
-//         
-//         // Posting the user to database
-//         $.ajax({
-//             type: 'POST',
-//             url: '/register',
-//             data: user,
-//         })
-//     })
-// })
-
-
-// Import the dependencies for testing
+// Import the libraries for testing
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var app = require('../server');
 
+var requestp = require("supertest-as-promised");
+var agent = requestp.agent(app)
 
+// Creating test items
 var user = {
     "firstName": "Test",
     "lastName": "User",
@@ -52,37 +14,79 @@ var user = {
     "password": "test"
 };
 
+var testItem = {
+    "item": "Complete coursework"
+}
 
-// Configure chai
+// Configure chai and server
 chai.use(chaiHttp);
 chai.should();
 
-app.use(require('body-parser').json());
+describe("Users", () => {
+    describe("Register User", () => {
+        it("should register a new user", (done) => {
+            chai.request(app)
+                .post("/register")
+                .type('form')
+                .send(user)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    done();
+                });
+        });
+    });
+    // describe("Delete User", () => {
+    //     it("should delete an existing user", (done) => {
+    //         chai.request(app)
+    //             .delete("/register/" + user.email)
+    //             .type('form')
+    //             .end((err, res) => {
+    //                 res.should.have.status(200);
+    //                 done();
+    //             });
+    //     });
+    // });
 
-describe("Register User", () => {
-    it("should register a new user", (done) => {
-        chai.request(app)
-            .post("/register")
+
+    describe("Log User In", () => {
+        it("should log test user in successfully", (done) => {
+            agent
+            .post('/login')
             .type('form')
-            .send(user)
-            .end((err, res) => {
-                res.should.have.status(200);
-                done();
-            });
+            .send({email: user.email, password: user.password})
+                .end((err, res) => {
+                    res.should.redirectTo('/todo');
+                    done();
+                });
+        });
+    });
+    describe("Incorrect Password", () => {
+        it("should fail to log test user in due to incorrect password", (done) => {
+            agent
+            .post('/login')
+            .type('form')
+            .send({email: user.email, password: "wrong"})
+                .end((err, res) => {
+                    res.should.redirectTo('/login');
+                    done();
+                });
+        });
+    });
+    describe("Incorrect Email", () => {
+        it("should fail to log test user in due to incorrect email", (done) => {
+            agent
+            .post('/login')
+            .type('form')
+            .send({email: "wrong@wrongemail.com", password: user.password})
+                .end((err, res) => {
+                    res.should.redirectTo('/login');
+                    done();
+                });
+        });
     });
 });
 
-describe("Delete User", () => {
-    it("should delete an existing user", (done) => {
-        chai.request(app)
-            .delete("/register/" + user.email)
-            .type('form')
-            .end((err, res) => {
-                res.should.have.status(200);
-                done();
-            });
-    });
-});
+
 
 describe("todoItems", () => {
     describe("GET /", () => {
@@ -93,6 +97,18 @@ describe("todoItems", () => {
                 .end((err, res) => {
                     res.should.have.status(200);
                     res.body.should.be.a('object');
+                    done();
+                });
+        });
+    });
+    describe("Add Item", () => {
+        it("should add an item to test users database", (done) => {
+            agent
+                .post("/todo")
+                .type('form')
+                .send({"item": "Test"})
+                .end((err, res) => {
+                    res.should.have.status(200);
                     done();
                 });
         });

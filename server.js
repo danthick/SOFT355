@@ -38,4 +38,8 @@ mongoose.connect(uri, {useUnifiedTopology: true, useNewUrlParser: true}, functio
 appController(app);
 listController(app);
 
+app.all('*', function(req, res) {
+    res.redirect("/login");
+});
+
 module.exports = app;

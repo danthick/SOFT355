@@ -13,11 +13,6 @@ module.exports = function (app) {
             });
         });
 
-    app.get("/", function (request, response) {
-        console.log("Viewing the homepage");
-        response.sendFile(path.join(__dirname, '..', '/index.html'));
-    });
-
     app.get("/register", checkNotAuthenticated, function (request, response) {
         console.log("Viewing the register page");
         response.render('register.ejs');
@@ -47,11 +42,12 @@ module.exports = function (app) {
     })
 
     app.delete("/register/:email", checkNotAuthenticated, async function (request, response) {
-        //var user = await getUserByEmail(request._passport.session.user);
         console.log("Deleting user")
         schemas.User.findOneAndDelete({
             email: request.params.email,
-        }, function (err, data) {});
+        }, function (err, data) {
+
+        });
         response.end();
     })
 
@@ -94,12 +90,14 @@ module.exports = function (app) {
 
 
     var WebSocketServer = require("websocket").server;
-    
+
     var server = app.listen(9000, function () {
         console.log("Listening on 9000");
     })
 
-    var wss = new WebSocketServer({ httpServer: server });
+    var wss = new WebSocketServer({
+        httpServer: server
+    });
     var clients = [];
 
     // WebSocket server
@@ -108,11 +106,11 @@ module.exports = function (app) {
         clients.push(connection);
 
 
-        connection.on('message', function (message) { 
+        connection.on('message', function (message) {
             var email = message.utf8Data;
-            clients.forEach(function(client) {
+            clients.forEach(function (client) {
                 client.send(message.utf8Data);
-              });
+            });
         });
 
         connection.on('close', function (connection) {

@@ -17,6 +17,8 @@ ul {
     margin: 0;
     padding: 0;
     list-style: disc;
+    display:block;
+    width:100%;
 }
 
 /* Style the list items */
@@ -29,7 +31,10 @@ ul li {
     transition: 0.2s;
     overflow: hidden;
     text-overflow: ellipsis;
+
 }
+
+[contenteditable="true"] { padding: 12px 8px 12px 40px; outline: 2px dashed #CCC; }
 
 /* Set every other list item to a different colour */
 ul li:nth-child(odd) {
@@ -160,3 +165,4 @@ input {
       width: 100%;
     }
   }
+  

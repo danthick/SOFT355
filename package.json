@@ -13,7 +13,6 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "ejs": "^3.0.1",
@@ -27,6 +26,7 @@
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",
+    "supertest-as-promised": "^4.0.2",
     "websocket": "^1.0.31"
   }
 }

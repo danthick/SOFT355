@@ -53,7 +53,7 @@ $(document).ready(function () {
 });
 
 function editItem(todoIndex, todoItem) {
-    var item = $("#" + todoIndex);
+    $("#" + todoIndex).text($("#" + todoIndex).contents().get(0).nodeValue + "\n");
     // Making item editable and changing focus
     $("#" + todoIndex).attr("contenteditable", "true");
     $("#editBtn" + todoIndex).attr("contenteditable", "false");
@@ -64,7 +64,7 @@ function editItem(todoIndex, todoItem) {
     $("#" + todoIndex).focus();
 
 
-    $("#" + todoIndex).on('focusout', function () {
+    $("#" + todoIndex).on('blur', function () {
         var newItem = $("#" + todoIndex).contents().get(0).nodeValue;
         if (newItem == null) {
             $("#" + todoIndex).contents().get(0).setCustomValidity('Password Must be Matching.');

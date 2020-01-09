@@ -6,7 +6,11 @@ var app = require('../server');
 var requestp = require("supertest-as-promised");
 var agent = requestp.agent(app)
 
-// Creating test items
+// Configure chai and server
+chai.use(chaiHttp);
+chai.should();
+
+// Creating test item and user
 var user = {
     "firstName": "Test",
     "lastName": "User",
@@ -17,10 +21,6 @@ var user = {
 var testItem = {
     "item": "Complete coursework"
 }
-
-// Configure chai and server
-chai.use(chaiHttp);
-chai.should();
 
 describe("Users", () => {
     describe("Register User", () => {
@@ -46,26 +46,15 @@ describe("Users", () => {
     //             });
     //     });
     // });
-
-
-    describe("Log User In", () => {
-        it("should log test user in successfully", (done) => {
-            agent
-            .post('/login')
-            .type('form')
-            .send({email: user.email, password: user.password})
-                .end((err, res) => {
-                    res.should.redirectTo('/todo');
-                    done();
-                });
-        });
-    });
     describe("Incorrect Password", () => {
         it("should fail to log test user in due to incorrect password", (done) => {
             agent
-            .post('/login')
-            .type('form')
-            .send({email: user.email, password: "wrong"})
+                .post('/login')
+                .type('form')
+                .send({
+                    email: user.email,
+                    password: "wrong"
+                })
                 .end((err, res) => {
                     res.should.redirectTo('/login');
                     done();
@@ -75,11 +64,29 @@ describe("Users", () => {
     describe("Incorrect Email", () => {
         it("should fail to log test user in due to incorrect email", (done) => {
             agent
-            .post('/login')
-            .type('form')
-            .send({email: "wrong@wrongemail.com", password: user.password})
+                .post('/login')
+                .type('form')
+                .send({
+                    email: "wrong@wrongemail.com",
+                    password: user.password
+                })
                 .end((err, res) => {
                     res.should.redirectTo('/login');
+                    done();
+                });
+        });
+    });
+    describe("Log User In", () => {
+        it("should log test user in successfully", (done) => {
+            agent
+                .post('/login')
+                .type('form')
+                .send({
+                    email: user.email,
+                    password: user.password
+                })
+                .end((err, res) => {
+                    res.should.redirectTo('/todo');
                     done();
                 });
         });
@@ -88,29 +95,44 @@ describe("Users", () => {
 
 
 
-describe("todoItems", () => {
-    describe("GET /", () => {
-        // Test to get all students record
-        it("should get all students record", (done) => {
-            chai.request(app)
+describe("Items", () => {
+    describe("Get To Do List", () => {
+        it("should get all user to do item", (done) => {
+            agent
                 .get('/todo')
                 .end((err, res) => {
                     res.should.have.status(200);
-                    res.body.should.be.a('object');
                     done();
                 });
         });
     });
     describe("Add Item", () => {
-        it("should add an item to test users database", (done) => {
+        it("should add an item to test users to do list", (done) => {
             agent
                 .post("/todo")
                 .type('form')
-                .send({"item": "Test"})
+                .send({
+                    item: testItem.item
+                })
                 .end((err, res) => {
                     res.should.have.status(200);
                     done();
                 });
+        });
+    });
+    describe("Edit Item", () => {
+        it("should edit an items name", (done) => {
+            agent
+                .put("/todo/" + testItem.item)
+                .type('form')
+                .send({
+                    old: testItem.item,
+                    new: "Updated"
+                })
+                .end((err, res) => {
+                    //res.should.have.status(200);
+                    done();
+                }).catch(done);
         });
     });
 });

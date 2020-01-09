@@ -31,8 +31,8 @@ module.exports = function (app) {
             "item": request.body.old
         }, {
             "item": request.body.new
-        }, function (err, data) {});
-        //response.end();
+        }, {useFindAndModify: false} ,function (err, data) {});
+        response.end();
     });
 
     app.delete("/todo/:item", checkAuthenticated, async function (request, response) {
@@ -58,14 +58,14 @@ module.exports = function (app) {
                 "item": request.body.item
             }, {
                 "completed": false
-            }, function (err, data) {});
+            }, {useFindAndModify: false}, function (err, data) {});
         } else {
             schemas.ToDoItem.findOneAndUpdate({
                 email: user[0].email,
                 "item": request.body.item
             }, {
                 "completed": true
-            }, function (err, data) {});
+            }, {useFindAndModify: false}, function (err, data) {});
         }
         response.end();
     });

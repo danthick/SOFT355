@@ -7,15 +7,13 @@ $(document).ready(function () {
             "email": $('#email').val(),
             "password": $('#password').val()
         };
-        var cPassword = {
-            "cPassword": $('#cPassword').val()
-        };
 
         // Resetting validity
         $("#cPassword")[0].setCustomValidity('');
         $('#email')[0].setCustomValidity('');
         var uniqueEmail = false;
         event.preventDefault();
+
         // Checking form validity
         if ($('#register-form')[0].checkValidity()) {
             // Checking password and confirmation of password match
@@ -26,19 +24,14 @@ $(document).ready(function () {
                     url: '/register',
                     data: user,
                     success: function (response) {
-                        // DO SOMETING IF SUCCESS e.g. reload something
-
-                        // Re-directing to login page
-                        //window.location = data.redirect
                         $("#myModal").modal('show');
-
                     },
+                    // If server returns error because email already exists
                     error: function(respsonse){
                         event.preventDefault();
                         $('#email')[0].setCustomValidity('Email address already exists.');
                         $('#email')[0].reportValidity();
                     }
-
                 })
                 
             // If passwords don't match
@@ -48,7 +41,6 @@ $(document).ready(function () {
                 $("#cPassword")[0].reportValidity();
                 $('#password').val('');
                 $('#cPassword').val('');
-
             }
         }
     });

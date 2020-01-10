@@ -2,7 +2,6 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 var app = require('../server');
-
 var requestp = require("supertest-as-promised");
 var agent = requestp.agent(app)
 
@@ -17,11 +16,11 @@ var user = {
     "email": "test@user.com",
     "password": "test"
 };
-
 var testItem = {
     "item": "Complete coursework"
 }
 
+// Testing user functions. Registering, and logging in.
 describe("Users", () => {
     describe("Register User", () => {
         it("should register a new user", (done) => {
@@ -83,7 +82,7 @@ describe("Users", () => {
 });
 
 
-
+// Testing item functions. Adding, editing and deleting items.
 describe("Items", () => {
     describe("Get To Do List", () => {
         it("should get all user to do item", (done) => {
@@ -140,17 +139,7 @@ describe("Items", () => {
     });
 });
 
-describe("Delete User", () => {
-    it("should delete an existing user", (done) => {
-        chai.request(app)
-            .delete("/register/" + user.email)
-            .type('form')
-            .end((err, res) => {
-                res.should.have.status(200);
-                done();
-            });
-    });
-});
+// Testing logging the user out
 describe("Log User Out", () => {
     it("should log user out and return to login page", (done) => {
         agent
@@ -158,6 +147,19 @@ describe("Log User Out", () => {
             .type('form')
             .end((err, res) => {
                 res.should.redirectTo('/login');
+                done();
+            });
+    });
+});
+
+// Testing deleting a user
+describe("Delete User", () => {
+    it("should delete an existing user", (done) => {
+        chai.request(app)
+            .delete("/register/" + user.email)
+            .type('form')
+            .end((err, res) => {
+                res.should.have.status(200);
                 done();
             });
     });

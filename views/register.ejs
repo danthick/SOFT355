@@ -4,18 +4,18 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
         <script src="register.js" type="text/javascript"></script>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
-            id="bootstrap-css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="css/login.css">
+        <title>GetIt Done - Register</title>
     </head>
 
     <body>
+        <!-- Registration box containing all needed input boxes -->
         <div class="container login-container">
             <div class="login-form text-center">
                 <h1>GetIt Done</h1>
                 <img src="https://img.icons8.com/cotton/64/000000/checklist--v1.png">
-                
                 <form action="/register" method="POST" id="register-form">
                     <h3>Please enter your details:</h3>
                     <div class="form-group">
@@ -45,11 +45,7 @@
             </div>
         </div>
 
-
-
-
-
-        <!-- Modal Success Popup -->
+        <!-- Modal success popup, if the registration is succesful. Redirects to login page.-->
         <div class="modal fade success-popup" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog modal-sm" role="document">
                 <div class="modal-content">
@@ -61,11 +57,8 @@
                         </p>
                         <a href="./login" class="rd_more btn btn-default">Login</a>
                     </div>
-
                 </div>
             </div>
         </div>
-
     </body>
-
     </html>

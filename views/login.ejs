@@ -1,28 +1,21 @@
 <DOCTYPE! html>
     <html>
-
     <head>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet"
-            id="bootstrap-css">
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        
         <link rel="stylesheet" type="text/css" href="css/login.css">
+        <title>GetIt Done - Login</title>
     </head>
-
     <body>
-
-
-
-
-
+        <!-- Form containing needed input boxes and a login button to attempt to login using passport local -->
         <div class="container login-container">
                 <div class="login-form text-center">
                         <h1>GetIt Done</h1>
                         <img src="https://img.icons8.com/cotton/64/000000/checklist--v1.png">
-                    
                     <form action="/login" method="POST">
                         <h3>Please enter your login details:</h3>
+                        <!-- Message displays if email or password is incorrect -->
                         <% if (messages.error) { %>
                             <h3 style="color: darkred; font-size: 15px;"><%= messages.error %></h3>
                             <% } %>
@@ -42,5 +35,4 @@
                 </div>
         </div>
     </body>
-
     </html>

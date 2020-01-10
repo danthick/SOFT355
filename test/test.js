@@ -35,17 +35,6 @@ describe("Users", () => {
                 });
         });
     });
-    // describe("Delete User", () => {
-    //     it("should delete an existing user", (done) => {
-    //         chai.request(app)
-    //             .delete("/register/" + user.email)
-    //             .type('form')
-    //             .end((err, res) => {
-    //                 res.should.have.status(200);
-    //                 done();
-    //             });
-    //     });
-    // });
     describe("Incorrect Password", () => {
         it("should fail to log test user in due to incorrect password", (done) => {
             agent
@@ -129,10 +118,47 @@ describe("Items", () => {
                     old: testItem.item,
                     new: "Updated"
                 })
+                .end()
+                .then(function (err, res) {
+                    done()
+                })
+                .catch(function (err) {
+                    done(err);
+                })
+        })
+    });
+    describe("Delete Item", () => {
+        it("should delete an item", (done) => {
+            agent
+                .delete("/todo/" + "Updated")
+                .type('form')
                 .end((err, res) => {
-                    //res.should.have.status(200);
+                    res.should.have.status(200);
                     done();
-                }).catch(done);
-        });
+                });
+        })
+    });
+});
+
+describe("Delete User", () => {
+    it("should delete an existing user", (done) => {
+        chai.request(app)
+            .delete("/register/" + user.email)
+            .type('form')
+            .end((err, res) => {
+                res.should.have.status(200);
+                done();
+            });
+    });
+});
+describe("Log User Out", () => {
+    it("should log user out and return to login page", (done) => {
+        agent
+            .get("/logout")
+            .type('form')
+            .end((err, res) => {
+                res.should.redirectTo('/login');
+                done();
+            });
     });
 });

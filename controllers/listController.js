@@ -27,6 +27,8 @@ module.exports = function (app) {
 
     app.put("/todo/:item", checkAuthenticated, function (request, response) {
         console.log("Updating item")
+        console.log(request.body.old);
+        console.log(request.body.new);
         schemas.ToDoItem.findOneAndUpdate({
             "item": request.body.old
         }, {

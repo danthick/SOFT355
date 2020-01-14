@@ -40,10 +40,10 @@
                         <tr>
                             <td>
                                 <% if (items[i].completed == false){ %>
-                                <li contentEditable=false id=<%=i.toString()%>><%= items[i].item%><button
-                                        class="editButton" onclick="editItem('<%=i.toString()%>', '<%= items[i].item  %>')"
-                                        id="editBtn<%=i.toString()%>">&#9998;</button><button class="deleteButton" onclick="deleteItem('<%= items[i].item  %>')"
-                                        id="deleteBtn<%=i.toString()%>">&#128465;</button></li>
+                                    <li contentEditable="false" id="<%=i.toString()%>"><%=items[i].item%>
+                                        <button class="editButton" onclick="editItem('<%=i.toString()%>', '<%=items[i].item%>')" id="editBtn<%=i.toString()%>">&#9998;</button>
+                                        <button class="deleteButton" onclick="deleteItem('<%=items[i].item%>')" id="deleteBtn<%=i.toString()%>">&#128465;</button>
+                                    </li>
                             </td>
                         </tr>
                         <%}%>
@@ -62,10 +62,10 @@
                     <tr>
                         <td>
                             <% if (items[i].completed == true){ %>
-                            <li contentEditable=false id=<%=i.toString()%>><%= items[i].item%><button
-                                    class="editButton" onclick="editItem('<%=i.toString()%>', '<%= items[i].item  %>')"
-                                    id="editBtn<%=i.toString()%>">&#9998;</button><button class="deleteButton" onclick="deleteItem('<%= items[i].item  %>')"
-                                    id="deleteBtn<%=i.toString()%>">&#128465;</button></li>
+                            <li contentEditable="false" id="<%=i.toString()%>"><%=items[i].item%>
+                                <button class="editButton" onclick="editItem('<%=i.toString()%>', '<%=items[i].item%>')" id="editBtn<%=i.toString()%>">&#9998;</button>
+                                <button class="deleteButton" onclick="deleteItem('<%=items[i].item%>')" id="deleteBtn<%=i.toString()%>">&#128465;</button>
+                            </li>
                         </td>
                     </tr>
                     <%}%>

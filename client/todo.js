@@ -27,7 +27,7 @@ $(document).ready(function () {
             $('#item')[0].setCustomValidity("Please enter a to do item!");
             $('#item')[0].reportValidity();
             event.preventDefault();
-        // Send post request
+            // Send post request
         } else {
             $.ajax({
                 type: 'POST',
@@ -80,11 +80,13 @@ function editItem(todoIndex, todoItem) {
     $("#" + todoIndex).on('blur', function () {
         // Get updated item value
         var newItem = $("#" + todoIndex).contents().get(0).nodeValue;
+        newItem = newItem.replace(/(\r\n|\n|\r)/gm, "");
+        newItem = newItem.replace(/\s+$/, '');
         // Checking its not blank
         if (newItem == null) {
             $("#" + todoIndex).contents().get(0).setCustomValidity('Item can not be empty');
             $("#" + todoIndex).contents().get(0).reportValidity();
-        // Send update request to server
+            // Send update request to server
         } else {
             $.ajax({
                 type: 'PUT',
@@ -96,7 +98,10 @@ function editItem(todoIndex, todoItem) {
             })
             // On success send web socket update and reload page
             socket.send(email);
-            location.reload(true);
+            setTimeout(function () {
+                location.reload(true);
+            }, 500);
+            
         }
     })
 }

@@ -63,6 +63,7 @@ module.exports = function (app) {
     // Update route to change if an item is completed or not
     app.put("/todo/complete/:item", checkAuthenticated, async function (request, response) {
         console.log("Changing item completion status")
+        console.log(request.body.item);
         // Get user
         var user = await getUserByEmail(request._passport.session.user);
         // Find item that needs updating

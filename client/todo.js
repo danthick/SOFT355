@@ -47,6 +47,8 @@ $(document).ready(function () {
         if (e.target.className !== "editButton" && e.target.className !== "deleteButton" && e.target.isContentEditable !== true) {
             // Getting item that was clicked on and send a put request to server
             var todoItem = $(this).contents().get(0).nodeValue;
+            todoItem = todoItem.replace(/(\r\n|\n|\r)/gm, "");
+            todoItem = todoItem.replace(/\s+$/, '');
             $.ajax({
                 type: 'PUT',
                 url: '/todo/complete/' + todoItem,
@@ -101,7 +103,7 @@ function editItem(todoIndex, todoItem) {
             setTimeout(function () {
                 location.reload(true);
             }, 500);
-            
+
         }
     })
 }

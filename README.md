@@ -1,5 +1,6 @@
 # SOFT355 - GetIt Done
 ## Description
+GetIt Done is a simple to do list application which allows users to access a personal to do list and perform functions such as: create, edit and complete to do items. I used the MEAN stack to develop this as well as a build server and deployment server.
 
 ## Installation
 To run the application use the following commands, assuming that [Node.js is installed](https://nodejs.org/en/download/):
